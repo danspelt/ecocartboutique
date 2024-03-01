@@ -1,4 +1,4 @@
-import { FIRESTORE } from '../../firebaseConfig';
+import { FIRESTORE } from '@/firebaseConfig';
 import { collection, query, where, orderBy, limit, getDocs, addDoc, } from 'firebase/firestore';
 import data from '../data';
 const PAGE_SIZE = 3;
@@ -8,6 +8,7 @@ const getLatest = async () => {
   const q = query(productsRef, orderBy('createdAt', 'desc'), limit(PAGE_SIZE));
   const querySnapshot = await getDocs(q);
   const products = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  console.log(productsRef);
   return products;
 };
 
@@ -93,14 +94,34 @@ const addProductsFirestore = async () => {
 }
 
 
+const getAllProducts = async () => {
+  const productsRef = collection(FIRESTORE, 'products');
+  const querySnapshot = await getDocs(productsRef);
+  
+  // Log the querySnapshot to see what data is returned
+  console.log(querySnapshot);
+
+  // If the snapshot is empty, this will log an empty array.
+  const products = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  
+  // Log the final products array to see if the mapping is correct.
+  console.log(products);
+
+  return products;
+};
+
+
+// Add to productService object
 const productService = {
   getLatest,
   getFeatured,
   getBySlug,
   getByQuery,
   getCategories,
-  addProductsFirestore
+  addProductsFirestore,
+  getAllProducts // Add this line
 };
+
 
 
 export default productService;
