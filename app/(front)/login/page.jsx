@@ -1,15 +1,17 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import userService from '@/lib/services/userServices';
+import Link from 'next/link';
+import { FaGoogle } from 'react-icons/fa'; // Importing Google icon
+
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle login submission logic here (e.g., send data to the backend)
-    console.log('Email:', email, 'Password:', password); 
-    userService.login(email, password)
+    console.log('Email:', email, 'Password:', password);
+    userService.login(email, password);
   };
 
   return (
@@ -41,14 +43,25 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
+              <Link href="/forgot-password" className="text-xs text-right text-blue-600">
+                  Forgot password?               
+              </Link>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
+            </div>
+            <div className="divider">OR</div> {/* Divider */}
+            <div className="form-control">
+              <button className="btn btn-outline flex justify-center items-center gap-2">
+                <FaGoogle /> {/* Google Icon */}
+                Sign In with Google
+              </button>
+            </div>
+            <div className="divider"></div> {/* Divider */}
+              <div className="form-control mt-6">
+              <Link href="/signup" className="btn btn-secondary">
+                Don't have an account? Sign up
+              </Link>
             </div>
           </form>
         </div>
