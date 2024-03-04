@@ -1,26 +1,13 @@
-"use client";
 import Link from "next/link";
-import { useContext, useState } from "react";
-import { AuthContext } from "@/context/AuthContext";
-import Menu from "./Menu";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import Menu from "./Menu"; // Client component
+import SearchBox from "./SearchBox";
+import SignInButton from "./SignInButton"; // Client component
+import SignUpButton from "./SignUpButton"; // Client component
+import ProfileButton from "./ProfileButton";
+import ShoppingCartIcon from "./ShoppingCartIcon"; // Client component
 
-const NavBar = () => {
-  const { user, signInWithGoogle, signOutUser } = useContext(AuthContext);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
+// Server component for NavBar
+export default function NavBar() {
   return (
     <div className="navbar bg-base-100 border-b-2 px-4 md:px-8 lg:px-16">
       <div className="navbar-start">
@@ -29,36 +16,16 @@ const NavBar = () => {
           YourBrand
         </Link>
       </div>
-      <div className="navbar-center hidden md:flex"></div>
-      <div className="navbar-end">
-        {user ? (
-          <div
-            className="dropdown dropdown-end flex gap-4"
-            onClick={toggleMenu}
-          >
-            <h1 className="text-nowrap">Hello, {user.displayName}</h1>
-            <Menu user={user} isOpen={isMenuOpen} />
+      <div className="navbar-center hidden md:flex">
+        <SearchBox />
+      </div>
+      <div className="navbar-end space-x-4">
+        <SignInButton />
+        <SignUpButton />
 
-            <span className="indicator">
-              <span className="indicator-item badge badge-secondary"></span>
-              <Link href="/cart">
-                <MdOutlineShoppingCart className="text-2xl" />
-              </Link>
-            </span>
-          </div>
-        ) : (
-          <div className="flex gap-4">
-            <Link href="/login" className="btn btn-ghost">
-              Login
-            </Link>
-            <Link href="/signup" className="btn btn-primary">
-              Sign Up
-            </Link>
-          </div>
-        )}
+        <ProfileButton />
+        <ShoppingCartIcon />
       </div>
     </div>
   );
-};
-
-export default NavBar;
+}

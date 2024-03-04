@@ -1,38 +1,38 @@
-'use client'
-import { useSearchParams } from 'next/navigation'
-import useSWR from 'swr'
+"use client";
+import { useSearchParams } from "next/navigation";
 
-export const SearchBox = () => {
-  const searchParams = useSearchParams()
-  const q = searchParams.get('q') || ''
-  const category = searchParams.get('category') || 'All'
-
-  const { data: categories, error } = useSWR('/api/products/categories')
-
-  if (error) return error.message
-  if (!categories) return 'Loading...'
-
+const SearchBox = () => {
+  const searchParams = useSearchParams();
+  const q = searchParams.get("q") || "";
+  const category = searchParams.get("category") || "All";
+  const categories = ["All", "Electronics", "Clothing", "Books"];
   return (
-    <form action="/search" method="GET">
-      <div className="join">
-        <select
-          name="category"
-          defaultValue={category}
-          className="join-item select select-bordered "
-        >
-          <option value="all">All</option>
-          {categories.map((c) => (
-            <option key={c}>{c}</option>
-          ))}
-        </select>
-        <input
-          className="join-item input input-bordered  w-48"
-          placeholder="Search"
-          defaultValue={q}
-          name="q"
-        />
-        <button className="join-item btn">Search</button>
-      </div>
-    </form>
-  )
-}
+    <div className="flex w-full gap-4 shadow-orange-50">
+      <input
+        className="p-2 border-2 border-gray-300 rounded-lg"
+        type="text"
+        placeholder="Search"
+        value={q}
+        onChange={(e) => {
+          searchParams.set("q", e.target.value);
+        }}
+      />
+      <select
+        className="p-2 border-2 border-gray-300 rounded-lg"
+        value={category}
+        onChange={(e) => {
+          searchParams.set("category", e.target.value);
+        }}
+      >
+        <option value="All">All</option>
+        {categories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+export default SearchBox;
