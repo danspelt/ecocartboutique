@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/nav/NavBar";
@@ -14,10 +15,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Suspense fallback="Loading...">
         <AuthContextProvider>
         <NavBar />
         {children}
         </AuthContextProvider>
+        </Suspense>
       </body>
     </html>
   );
