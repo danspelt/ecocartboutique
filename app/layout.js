@@ -7,8 +7,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export const metadata = {
-  title: "My Next.js Site",
-  description: "This is a Next.js site",
+  title: "EcoCart Boutique",
+  description: "The best place to buy eco-friendly products",
+  image: "/images/eco-cart-boutique.webp",
+  keywords: "eco-friendly, sustainable, shop, boutique",
 };
 
 export default function RootLayout({ children }) {
