@@ -1,11 +1,10 @@
 'use client';
-import { useContext } from 'react';
-import { AuthContext } from '@/context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
 import { FaUserCircle } from 'react-icons/fa';
 import Image from 'next/image';
 
 export default function ProfileButton() {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   if (!user) return null; // Don't render anything if user is not logged in
 

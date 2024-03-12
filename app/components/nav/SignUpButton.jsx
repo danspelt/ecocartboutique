@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { AuthContext } from "@/context/AuthContext";
-import { useContext } from "react";
+import { useAuth } from "@/context/AuthContext";
+
 // Client component for sign-up button
 export default function SignUpButton() {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   if (user) return null; // Don't render anything if user is logged in
   return (
     <Link href="/signup" className="btn btn-primary">

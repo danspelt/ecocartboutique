@@ -1,11 +1,10 @@
 "use client";
-import { useContext } from "react";
-import { AuthContext } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 
 // Client component for sign-in button
 export default function SignInButton() {
-  const { user, signInWithGoogle } = useContext(AuthContext);
+  const { user, signInWithGoogle } = useAuth();
 
   const handleSignIn = async () => {
     try {
