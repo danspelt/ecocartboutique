@@ -4,10 +4,10 @@ import { OrderItem } from '@/lib/models/OrderModel'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-export default function AddToCart({ item }) {
+export default function AddToCart({ item }: { item: OrderItem }) {
   const router = useRouter()
   const { items, increase, decrease } = useCartService()
-  const [existItem, setExistItem] = useState<OrderItem>(null)
+  const [existItem, setExistItem] = useState<OrderItem | undefined>()
 
   useEffect(() => {
     setExistItem(items.find((x) => x.slug === item.slug))
