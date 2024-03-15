@@ -28,7 +28,6 @@ export default function NavBar() {
       <div className="navbar-end space-x-4">
         <SignInButton />
         <SignUpButton />
-
         <ProfileButton />
         <ShoppingCartIcon />
       </div>

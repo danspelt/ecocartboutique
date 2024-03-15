@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect } from 'react';
 //import useCartService from '../../lib/hooks/useCartStore';
-//import useLayoutService from '../../lib/hooks/useLayout';
+import useLayoutService from '../../lib/hooks/useLayout';
 import { signOut } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../firebaseConfig';
 

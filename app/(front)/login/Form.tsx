@@ -1,4 +1,4 @@
-
+'use client'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
