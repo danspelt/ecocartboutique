@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/nav/NavBar";
+import NavBar from "./components/header/NavBar";
 import { AuthContextProvider } from "@/context/AuthContext";
 import { AppContextProvider } from "@/context/AppContext";
 const inter = Inter({ subsets: ["latin"] });

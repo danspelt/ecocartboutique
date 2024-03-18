@@ -4,8 +4,8 @@ import { useAuth } from "@/context/AuthContext";
 
 // Client component for sign-up button
 export default function SignUpButton() {
-  const { user } = useAuth();
-  if (user) return null; // Don't render anything if user is logged in
+  const { currentUser } = useAuth();
+  if (currentUser) return null;  // Hide button if user is logged in
   return (
     <Link href="/signup" className="btn btn-primary">
       Sign Up

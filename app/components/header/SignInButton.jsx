@@ -4,21 +4,12 @@ import Link from "next/link";
 
 // Client component for sign-in button
 export default function SignInButton() {
-  const { user, signInWithGoogle } = useAuth();
-
-  const handleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  if (user) return null; // Don't render anything if user is logged in
+  const { currentUser } = useAuth();
   
+  if (currentUser) return null;  // Hide button if user is logged in
   return (
-    <Link href="/login" className="btn btn-ghost" onClick={handleSignIn}>
-      Login
+    <Link href="/signin" className="btn btn-primary">
+      SignIn 
     </Link>
   );
 }
