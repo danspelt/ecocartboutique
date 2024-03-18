@@ -5,10 +5,10 @@ const PAGE_SIZE = 3;
 
 const getLatest = async () => {
   const productsRef = collection(FIRESTORE, 'products');
-  const q = query(productsRef, orderBy('createdAt', 'desc'), limit(PAGE_SIZE));
+  const q = query(productsRef, orderBy('createdAt', 'desc'));
   const querySnapshot = await getDocs(q);
   const products = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  console.log(productsRef);
+  console.log(products);
   return products;
 };
 
@@ -32,12 +32,9 @@ const getBySlug = async (slug) => {
 };
 
 const getByQuery = async ({
-  q,
   category,
   sort,
-  price,
   rating,
-  page = '1'
 }) => {
   let productsRef = collection(FIRESTORE, 'products');
   let firestoreQuery = query(productsRef);
