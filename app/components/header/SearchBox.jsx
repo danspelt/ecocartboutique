@@ -31,6 +31,7 @@ const SearchBox = () => {
           </option>
         ))}
       </select>
+      <button className="join-item btn">Search</button>
     </div>
   );
 };

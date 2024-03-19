@@ -2,7 +2,7 @@ export const round2 = (num) =>
   Math.round((num + Number.EPSILON) * 100) / 100
 
 export function convertDocToObj(doc) {
-  doc._id = doc._id.toString()
+  doc._id = doc.id.toString()
   return doc
 }
 

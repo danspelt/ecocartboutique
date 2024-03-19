@@ -2,16 +2,29 @@ import { FIRESTORE } from '@/firebaseConfig';
 import { collection, query, where, orderBy, limit, getDocs, addDoc, } from 'firebase/firestore';
 import data from '../data';
 const PAGE_SIZE = 3;
-
 const getLatest = async () => {
   const productsRef = collection(FIRESTORE, 'products');
-  const q = query(productsRef, orderBy('createdAt', 'desc'));
-  const querySnapshot = await getDocs(q);
-  const products = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  console.log(products);
-  return products;
-};
+  const q = query(productsRef);
 
+  try {
+    const querySnapshot = await getDocs(q);
+
+    // Check if the querySnapshot is empty
+    console.log('Snapshot size:', querySnapshot.size);
+    if (querySnapshot.empty) {
+      console.log('No matching documents.');
+      return [];
+    }
+
+    const products = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log('Retrieved products:', products);
+    return products;
+  } catch (error) {
+    // Log the error if the query fails
+    console.error('Error getting documents:', error);
+    return [];
+  }
+};
 const getFeatured = async () => {
   const productsRef = collection(FIRESTORE, 'products');
   const q = query(productsRef, where('featured', '==', true), limit(PAGE_SIZE));

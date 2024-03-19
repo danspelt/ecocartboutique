@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_APP_NAME || 'Next Amazona V2',
+  title: process.env.NEXT_PUBLIC_APP_NAME || 'My Ecommerce Store',
   description:
     process.env.NEXT_PUBLIC_APP_DESC ||
     'Nextjs, Server components, Next auth, daisyui, zustand',
@@ -21,7 +21,7 @@ export default async function Home() {
       <div className="w-full carousel rounded-box mt-4">
         {featuredProducts.map((product, index) => (
           <div
-            key={product._id}
+            key={product.id}
             id={`slide-${index}`}
             className="carousel-item relative w-full"
           >
